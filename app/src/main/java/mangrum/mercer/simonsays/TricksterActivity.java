@@ -1,4 +1,12 @@
 package mangrum.mercer.simonsays;
 
-public class TricksterActivity {
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+public class TricksterActivity extends AppCompatActivity {
+    @Override
+    public void onCreate(Bundle savedInstance) {
+        super.onCreate(savedInstance);
+        setContentView(R.layout.activity_trickster);
+    }
 }
