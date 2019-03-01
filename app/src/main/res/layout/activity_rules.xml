@@ -8,14 +8,15 @@
     android:background="@color/colorRed">
 
     <TextView
-        android:id="@+id/textView7"
+        android:autoLink="web"
+        android:id="@+id/originalRule_tv"
         android:layout_width="248dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="serif-monospace"
-        android:text="Insert links to each version for rules."
+        android:text="https://www.hasbro.com/common/documents/3f4e2ca0206011ddbd0b0800200c9a66/620962835056900B10D1688756D7BA4A.pdf"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -24,14 +25,15 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:autoLink="web"
+        android:id="@+id/tricksterRule_tv"
         android:layout_width="248dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="serif-monospace"
-        android:text="Insert links to each version for rules."
+        android:text="https://www.hasbro.com/common/instruct/Simon_Trickster.pdf"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -40,7 +42,8 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:autoLink="web"
+        android:id="@+id/superRule_tv"
         android:layout_width="248dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -48,7 +51,7 @@
         android:layout_marginEnd="8dp"
         android:backgroundTintMode="add"
         android:fontFamily="serif-monospace"
-        android:text="Insert links to each version for rules."
+        android:text="https://www.hasbro.com/common/instruct/SuperSimon.pdf"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -86,7 +89,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/tricksterRule_tv" />
 
     <TextView
         android:id="@+id/textView6"
@@ -102,5 +105,5 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintTop_toBottomOf="@+id/originalRule_tv" />
 </android.support.constraint.ConstraintLayout>
