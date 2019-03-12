@@ -3,9 +3,11 @@ package mangrum.mercer.simonsays;
 import android.media.AudioAttributes;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.Button;
 
 import java.util.HashSet;
 import java.util.Random;
@@ -27,20 +29,20 @@ public class OriginalActivity extends AppCompatActivity implements View.OnClickL
 
         soundsLoaded = new HashSet<>();
 
-        final ImageButton playButton = findViewById(R.id.playButton);
+        final Button playButton = findViewById(R.id.playButton);
         playButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        final ImageButton playButton = findViewById(R.id.playButton);
-        final ImageButton greenSquare = findViewById(R.id.greenButton);
+        final Button playButton = findViewById(R.id.playButton);
+        final Button greenSquare = findViewById(R.id.green_button);
         greenSquare.setOnClickListener(this);
-        final ImageButton redSquare = findViewById(R.id.redButton);
+        final Button redSquare = findViewById(R.id.red_button);
         redSquare.setOnClickListener(this);
-        final ImageButton yellowSquare = findViewById(R.id.yellowButton);
+        final Button yellowSquare = findViewById(R.id.yellow_button);
         yellowSquare.setOnClickListener(this);
-        final ImageButton blueSquare = findViewById(R.id.blueButton);
+        final Button blueSquare = findViewById(R.id.blue_button);
         blueSquare.setOnClickListener(this);
         AudioAttributes.Builder builder = new AudioAttributes.Builder();
         builder.setUsage(AudioAttributes.USAGE_GAME);
@@ -71,27 +73,22 @@ public class OriginalActivity extends AppCompatActivity implements View.OnClickL
         final int loseId = soundPool.load(this, R.raw.wrong, 1);
         final int winId = soundPool.load(this, R.raw.win, 1);
 
-        if (v.getId() == R.id.greenButton && reqs[guess] == 1) {
+        if (v.getId() == R.id.green_button && reqs[guess] == 1) {
             playSound(greenId);
             guess++;
-        } else if (v.getId() == R.id.redButton && reqs[guess] == 2) {
+        } else if (v.getId() == R.id.red_button && reqs[guess] == 2) {
             playSound(redId);
             guess++;
-        } else if (v.getId() == R.id.yellowButton && reqs[guess] == 3) {
+        } else if (v.getId() == R.id.yellow_button && reqs[guess] == 3) {
             playSound(yellowId);
             guess++;
-        } else if (v.getId() == R.id.blueButton && reqs[guess] == 0) {
+        } else if (v.getId() == R.id.blue_button && reqs[guess] == 0) {
             playSound(blueId);
             guess++;
-        } else if (v.getId() != R.id.playButton) {
-            turns = 1;
-            guess = 0;
-            playSound(loseId);
         }
         if (v.getId() == R.id.playButton || guess == turns) {
             final int[] all = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
 
-            playButton.setImageResource(R.drawable.wait);
             playButton.setClickable(false);
             Handler handler = new Handler();
             final int compSeq = all[r.nextInt(all.length)];
@@ -102,7 +99,6 @@ public class OriginalActivity extends AppCompatActivity implements View.OnClickL
             if (turns == 9) {
                 playSound(winId);
             } else {
-                playButton.setImageResource(R.drawable.wait);
                 reqs[turns - 1] = (compSeq % 4);
                 iSub = 0;
                 for (int i = 0; i < turns; i++) {
@@ -112,52 +108,51 @@ public class OriginalActivity extends AppCompatActivity implements View.OnClickL
                         public void run() {
                             int turnTime = 1250;
                             if (reqs[iSub] == 1) {
-                                greenSquare.setImageResource(R.drawable.green_lit);
+                                greenSquare.setBackgroundResource(R.drawable.ltgreen_button);
                                 playSound(greenId);
                                 greenSquare.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        greenSquare.setImageResource(R.drawable.green_default);
+                                        greenSquare.setBackgroundResource(R.drawable.green_button);
                                         iSub++;
                                     }
                                 }, TIMER_ONE);
                             } else if (reqs[iSub] == 2) {
-                                redSquare.setImageResource(R.drawable.red_lit);
+                                redSquare.setBackgroundResource(R.drawable.ltred_button);
                                 playSound(redId);
                                 redSquare.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        redSquare.setImageResource(R.drawable.red_default);
+                                        redSquare.setBackgroundResource(R.drawable.red_button);
                                         iSub++;
                                     }
                                 }, TIMER_ONE);
                             } else if (reqs[iSub] == 3) {
-                                yellowSquare.setImageResource(R.drawable.yellow_lit);
+                                yellowSquare.setBackgroundResource(R.drawable.ltyellow_button);
                                 playSound(yellowId);
                                 yellowSquare.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        yellowSquare.setImageResource(R.drawable.yello_default);
+                                        yellowSquare.setBackgroundResource(R.drawable.yellow_button);
                                         iSub++;
                                     }
                                 }, TIMER_ONE);
                             } else if (reqs[iSub] == 0) {
-                                blueSquare.setImageResource(R.drawable.blue_lit);
+                                blueSquare.setBackgroundResource(R.drawable.ltblue_button);
                                 playSound(blueId);
                                 blueSquare.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        blueSquare.setImageResource(R.drawable.blue_default);
+                                        blueSquare.setBackgroundResource(R.drawable.blue_button);
                                         iSub++;
                                     }
                                 }, TIMER_ONE);
                             }
-                            playButton.setImageResource(R.drawable.wait);
                             playButton.postDelayed(new Runnable() {
 
                                 @Override
                                 public void run() {
-                                    playButton.setImageResource(R.drawable.play);
+
                                 }
                             }, turns * turnTime);
                         }
@@ -172,4 +167,4 @@ public class OriginalActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 }
-}
+
