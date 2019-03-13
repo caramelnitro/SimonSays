@@ -85,6 +85,10 @@ public class OriginalActivity extends AppCompatActivity implements View.OnClickL
         } else if (v.getId() == R.id.blue_button && reqs[guess] == 0) {
             playSound(blueId);
             guess++;
+        } else if (v.getId() != R.id.playButton) {
+            turns = 1;
+            guess = 0;
+            playSound(loseId);
         }
         if (v.getId() == R.id.playButton || guess == turns) {
             final int[] all = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
