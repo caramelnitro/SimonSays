@@ -128,7 +128,7 @@ public class SuperActivity extends AppCompatActivity implements View.OnClickList
             if (turns == 9) {
                 playSound(winId);
             } else {
-                reqs[turns - 1] = (compSeq % 4);
+                reqs[turns - 1] = (compSeq % 8);
                 iSub = 0;
                 for (int i = 0; i < turns; i++) {
 
