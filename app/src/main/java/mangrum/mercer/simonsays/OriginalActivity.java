@@ -89,6 +89,7 @@ public class OriginalActivity extends AppCompatActivity implements View.OnClickL
             turns = 1;
             guess = 0;
             playSound(loseId);
+            playButton.setClickable(true);
         }
         if (v.getId() == R.id.playButton || guess == turns) {
             final int[] all = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
