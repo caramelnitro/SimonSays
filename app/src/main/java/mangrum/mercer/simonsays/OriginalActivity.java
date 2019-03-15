@@ -86,9 +86,7 @@ public class OriginalActivity extends AppCompatActivity implements View.OnClickL
 
         //check if the correct button is pressed
         if (v.getId() == R.id.green_button && reqs[guess] == 1) {
-            greenSquare.setBackgroundResource(R.drawable.ltgreen_button);
             playSound(greenId);
-            greenSquare.setBackgroundResource(R.drawable.green_button);
             guess++;
         } else if (v.getId() == R.id.red_button && reqs[guess] == 2) {
             playSound(redId);
