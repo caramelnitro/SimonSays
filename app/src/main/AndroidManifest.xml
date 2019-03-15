@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,11 +18,16 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".AboutActivity"></activity>
-        <activity android:name=".OriginalActivity"></activity>
-        <activity android:name=".TricksterActivity"></activity>
-        <activity android:name=".SuperActivity"></activity>
-        <activity android:name=".RulesActivity"></activity>
+        <activity android:name=".AboutActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".OriginalActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".TricksterActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".SuperActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".RulesActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
