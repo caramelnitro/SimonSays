@@ -1,5 +1,7 @@
 package mangrum.mercer.simonsays;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.AudioAttributes;
 import android.media.SoundPool;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.HashSet;
 import java.util.Random;
@@ -20,6 +23,7 @@ public class SuperActivity extends AppCompatActivity implements View.OnClickList
     int iSub = 0;
     static int turns = 1;
     static int guess = 0;
+    int score = 0;
     int [] reqs = new int[8];
     private SoundPool soundPool;
     private Set<Integer> soundsLoaded;
@@ -30,7 +34,12 @@ public class SuperActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_super);
 
         soundsLoaded = new HashSet<>();
-
+        //create preferences/get value from previous games
+        SharedPreferences prefs = this.getSharedPreferences("SimonSays", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        score = prefs.getInt("HighScoreSuper", 0);
+        TextView tv = findViewById(R.id.highScore);
+        tv.setText("High Score: " + score);
         final Button playButton = findViewById(R.id.playButton);
         playButton.setOnClickListener(this);
     }
@@ -56,6 +65,7 @@ public class SuperActivity extends AppCompatActivity implements View.OnClickList
         final Button blueSquare2 = findViewById(R.id.blue_button2);
         blueSquare2.setOnClickListener(this);
 
+        TextView tv = findViewById(R.id.highScore);
         AudioAttributes.Builder builder = new AudioAttributes.Builder();
         builder.setUsage(AudioAttributes.USAGE_GAME);
 
@@ -229,6 +239,13 @@ public class SuperActivity extends AppCompatActivity implements View.OnClickList
                             }, turns * turnTime);
                         }
                     }, 1500 * i);
+                }
+                if(turns>score) {
+                    SharedPreferences prefs = this.getSharedPreferences("SimonSays", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putInt("HighScoreSuper", turns);
+                    editor.commit();
+                    tv.setText("High Score: " + turns);
                 }
             }
         }

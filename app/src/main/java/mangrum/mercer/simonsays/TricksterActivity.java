@@ -1,5 +1,7 @@
 package mangrum.mercer.simonsays;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.AudioAttributes;
 import android.media.SoundPool;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.HashSet;
 import java.util.Random;
@@ -19,6 +22,7 @@ public class TricksterActivity extends AppCompatActivity implements View.OnClick
     int iSub = 0;
     static int turns = 1;
     static int guess = 0;
+    int score = 0;
     int [] reqs = new int[8];
     int [] colors = new int[8];
     final int [] color = {R.drawable.ltgreen_button, R.drawable.ltred_button, R.drawable.ltyellow_button, R.drawable.ltblue_button};
@@ -30,6 +34,12 @@ public class TricksterActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_trickster);
 
         soundsLoaded = new HashSet<>();
+        //create preferences/get value from previous games
+        SharedPreferences prefs = this.getSharedPreferences("SimonSays", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        score = prefs.getInt("HighScoreTrickster", 0);
+        TextView tv = findViewById(R.id.highScore);
+        tv.setText("High Score: " + score);
 
         final Button playButton = findViewById(R.id.playButton);
         playButton.setOnClickListener(this);
@@ -46,6 +56,7 @@ public class TricksterActivity extends AppCompatActivity implements View.OnClick
         yellowSquare.setOnClickListener(this);
         final Button blueSquare = findViewById(R.id.button4);
         blueSquare.setOnClickListener(this);
+        TextView tv = findViewById(R.id.highScore);
         AudioAttributes.Builder builder = new AudioAttributes.Builder();
         builder.setUsage(AudioAttributes.USAGE_GAME);
 
@@ -166,6 +177,13 @@ public class TricksterActivity extends AppCompatActivity implements View.OnClick
                             }, turns * turnTime);
                         }
                     }, 1500 * i);
+                }
+                if(turns>score) {
+                    SharedPreferences prefs = this.getSharedPreferences("SimonSays", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putInt("HighScoreTrickster", turns);
+                    editor.commit();
+                    tv.setText("High Score: " + turns);
                 }
             }
         }
