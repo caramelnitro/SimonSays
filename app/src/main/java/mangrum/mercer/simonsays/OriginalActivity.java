@@ -35,6 +35,7 @@ public class OriginalActivity extends AppCompatActivity implements View.OnClickL
 
         final Button playButton = findViewById(R.id.playButton);
         playButton.setOnClickListener(this);
+        //create preferences/get value from previous games
         SharedPreferences prefs = this.getSharedPreferences("SimonSays", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         score = prefs.getInt("HighScore", 0);
@@ -75,7 +76,7 @@ public class OriginalActivity extends AppCompatActivity implements View.OnClickL
                 }
             }
         });
-
+        //saves IDs for sounds
         final int greenId = soundPool.load(this, R.raw.green, 1);
         final int redId = soundPool.load(this, R.raw.red, 1);
         final int yellowId = soundPool.load(this, R.raw.yellow, 1);
@@ -83,6 +84,7 @@ public class OriginalActivity extends AppCompatActivity implements View.OnClickL
         final int loseId = soundPool.load(this, R.raw.wrong, 1);
         final int winId = soundPool.load(this, R.raw.win, 1);
 
+        //check if the correct button is pressed
         if (v.getId() == R.id.green_button && reqs[guess] == 1) {
             playSound(greenId);
             guess++;
@@ -114,8 +116,10 @@ public class OriginalActivity extends AppCompatActivity implements View.OnClickL
             if (turns == 9) {
                 playSound(winId);
             } else {
+                //store the random number generated
                 reqs[turns - 1] = (compSeq % 4);
                 iSub = 0;
+                //plays the sequence
                 for (int i = 0; i < turns; i++) {
 
                     handler.postDelayed(new Runnable() {
@@ -173,6 +177,7 @@ public class OriginalActivity extends AppCompatActivity implements View.OnClickL
                         }
                     }, 1500 * i);
                 }
+                //high score check
                 if(turns>score) {
                     SharedPreferences prefs = this.getSharedPreferences("SimonSays", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = prefs.edit();
@@ -183,6 +188,7 @@ public class OriginalActivity extends AppCompatActivity implements View.OnClickL
             }
         }
     }
+    //plays sound
     private void playSound(int id){
         if(soundsLoaded.contains(id)) {
             soundPool.play(id, 1.0f, 1.0f, 0, 0, 1.0f);
