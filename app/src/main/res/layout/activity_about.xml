@@ -48,7 +48,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="wrong.mp3 - http://www.pacdv.com/sounds/interface_sounds.html - Interface Sound 16 green.wav - http://www.pacdv.com/sounds/interface_sounds-2.html - Interface Sound 51 blue.wav - http://www.pacdv.com/sounds/interface_sounds-2.html - Interface Sound 52 yellow.wav - http://www.pacdv.com/sounds/interface_sounds-2.html - Interface Sound 53 red.wav - http://www.pacdv.com/sounds/interface_sounds-2.html - Interface Sound 55 win.wav - http://www.pacdv.com/sounds/miscellaneous_sounds.html - Dhol Drums"
+        android:text="wrong.wav - http://www.pacdv.com/sounds/interface_sounds.html - Interface Sound 16 green.wav - http://www.pacdv.com/sounds/interface_sounds-2.html - Interface Sound 51 blue.wav - http://www.pacdv.com/sounds/interface_sounds-2.html - Interface Sound 52 yellow.wav - http://www.pacdv.com/sounds/interface_sounds-2.html - Interface Sound 53 red.wav - http://www.pacdv.com/sounds/interface_sounds-2.html - Interface Sound 55 win.wav - http://www.pacdv.com/sounds/miscellaneous_sounds.html - Dhol Drums"
         android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
