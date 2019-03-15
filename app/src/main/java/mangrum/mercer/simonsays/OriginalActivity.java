@@ -1,5 +1,7 @@
 package mangrum.mercer.simonsays;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.AudioAttributes;
 import android.media.SoundPool;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.HashSet;
 import java.util.Random;
@@ -19,6 +22,7 @@ public class OriginalActivity extends AppCompatActivity implements View.OnClickL
     int iSub = 0;
     static int turns = 1;
     static int guess = 0;
+    int score = 0;
     int [] reqs = new int[8];
     private SoundPool soundPool;
     private Set<Integer> soundsLoaded;
@@ -31,6 +35,11 @@ public class OriginalActivity extends AppCompatActivity implements View.OnClickL
 
         final Button playButton = findViewById(R.id.playButton);
         playButton.setOnClickListener(this);
+        SharedPreferences prefs = this.getSharedPreferences("SimonSays", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        score = prefs.getInt("HighScore", 0);
+        TextView tv = findViewById(R.id.highScore);
+        tv.setText("High Score: " + score);
     }
 
     @Override
@@ -46,6 +55,7 @@ public class OriginalActivity extends AppCompatActivity implements View.OnClickL
         blueSquare.setOnClickListener(this);
         AudioAttributes.Builder builder = new AudioAttributes.Builder();
         builder.setUsage(AudioAttributes.USAGE_GAME);
+        TextView tv = findViewById(R.id.highScore);
 
 
 
@@ -162,6 +172,13 @@ public class OriginalActivity extends AppCompatActivity implements View.OnClickL
                             }, turns * turnTime);
                         }
                     }, 1500 * i);
+                }
+                if(turns>score) {
+                    SharedPreferences prefs = this.getSharedPreferences("SimonSays", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putInt("HighScore", turns);
+                    editor.commit();
+                    tv.setText("High Score: " + turns);
                 }
             }
         }
